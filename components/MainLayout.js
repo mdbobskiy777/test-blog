@@ -9,6 +9,9 @@ export function MainLayout({children, title = 'Next App'}){
             <nav>
                 <Link href = {'/'}><a>Latest posts</a></Link>
             </nav>
+            <nav>
+                <Link href = {'/posts/new'}><a>Create new post</a></Link>
+            </nav>
             <main>{children}</main>
         </>
     )

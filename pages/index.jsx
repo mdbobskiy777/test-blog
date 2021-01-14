@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {get_posts, getPosts} from "../redux/actions/getPostsActions";
+import {deletePost, get_posts, getPosts} from "../redux/actions/getPostsActions";
 import {postsAPI} from "../api/api";
 import Link from "next/Link";
 import {MainLayout} from "../components/MainLayout";
@@ -42,7 +42,7 @@ class LatestPosts extends React.Component {
                                 <Link href={`/posts/[id]`} as={`/posts/${post.id}`}><a>{post.title}</a></Link>
                             </li>
                             <button onClick={() => {
-
+                                this.props.deletePost(post.id)
                             }}>X
                             </button>
                         </div>
@@ -57,8 +57,9 @@ const mapStateToProps = state => ({
     latestPosts:state.latestPosts
 });
 
-const mapDispatchToProps = {
-    get_posts:get_posts
-};
+const mapDispatchToProps = ({
+    get_posts:get_posts,
+    deletePost:deletePost
+});
 export default connect(mapStateToProps, mapDispatchToProps)(LatestPosts);
 
