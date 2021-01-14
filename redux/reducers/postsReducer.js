@@ -1,7 +1,7 @@
 import {ADD_COMMENT_SUCCESS, ADD_POST_SUCCESS, GET_LATEST_POSTS, GET_POST} from "../actions/getPostsActions";
 
 const initialState = {
-    posts: [],
+    posts: null,
     post: null,
     addPostSuccess:false,
 /*
