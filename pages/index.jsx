@@ -3,8 +3,11 @@ import {connect} from 'react-redux';
 import {get_posts, getPosts} from "../redux/actions/getPostsActions";
 import {postsAPI} from "../api/api";
 import Link from "next/Link";
+import {MainLayout} from "../components/MainLayout";
 
 class LatestPosts extends React.Component {
+
+    // НЕ НОРМ ШО Я ДЕЛАЮ ПО 2 ЗАПРОСА
 
     static async getInitialProps({store}) {
         debugger
@@ -30,7 +33,7 @@ class LatestPosts extends React.Component {
     render() {
         debugger
         return (
-            <div>
+            <MainLayout title={'Blog | Latest Posts'}>
                 <div>Latest posts</div>
                 <ul>
                     {this.props.latestPosts.posts.map((post, i) => (
@@ -45,7 +48,7 @@ class LatestPosts extends React.Component {
                         </div>
                     ))}
                 </ul>
-            </div>
+            </MainLayout>
         );
     }
 }
