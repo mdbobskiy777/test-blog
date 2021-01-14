@@ -34,6 +34,8 @@ export const addPost = (title, body) => async dispatch => {
 
 export const deletePost = (id) => async dispatch => {
     await postsAPI.deletePost(id);
+    return dispatch(getPosts())
+
 }
 
 export const addComment = (id, text) => async dispatch => {
