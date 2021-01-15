@@ -7,8 +7,6 @@ import store from '../redux/store';
 class MyApp extends App {
 
     static async getInitialProps({Component, ctx}) {
-        debugger
-
         const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
 
         //Anything returned here can be accessed by the client
@@ -18,7 +16,6 @@ class MyApp extends App {
     render() {
         //Page props that were returned  from 'getInitialProps' are stored in the props i.e. pageprops
         const {Component, pageProps, store} = this.props;
-        debugger
         return (
             <Provider store={store}>
                 <Component pageProps =  {pageProps}/>

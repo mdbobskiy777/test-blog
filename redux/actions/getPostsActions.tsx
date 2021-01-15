@@ -70,7 +70,7 @@ export const getPosts = (): ThunkAction<Promise<void>, AppStoreType, undefined, 
         */
         dispatch(get_posts(posts))
     }
-export const getPost = (id): ThunkAction<Promise<void>, AppStoreType, undefined, ActionsType> =>
+export const getPost = (id:number): ThunkAction<Promise<void>, AppStoreType, undefined, ActionsType> =>
     async (dispatch) => {
 
         const post = await postsAPI.getPost(id);

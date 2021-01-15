@@ -4,13 +4,13 @@ import FormControlsCreator from "../../components/FormsControls/FormsControls";
 import {connect} from "react-redux";
 import {add_post_success, addPost} from "../../redux/actions/getPostsActions";
 import Link from "next/Link";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 
 
 const Input = FormControlsCreator('input')
 
 
-function NewPost(props) {
+function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSuccess: any; addPost: (arg0: any, arg1: any) => void; submitError: any; }) {
     useEffect(() => {
         return () => {
             props.add_post_success(false);

@@ -1,5 +1,7 @@
 import Link from "next/Link"
 import Head from "next/head";
+import React from "react"
+
 export function MainLayout({children, title = 'Next App'}){
     return (
         <>

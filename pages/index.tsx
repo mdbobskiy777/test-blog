@@ -55,15 +55,14 @@ import {useEffect} from "react";
 }*/
 
 
-function LatestPosts(props) {
+function LatestPosts(props: { latestPosts: { posts: any; }; get_posts: (arg0: any) => void; pageProps: any; deletePost: (arg0: any) => void; }) {
 
     useEffect(() => {
-        debugger
             if (!props.latestPosts.posts) {
                 props.get_posts(props.pageProps)
             }
     },[props.latestPosts.posts])
-    debugger
+
     const actualProps = [...(props.latestPosts.posts) ? props.latestPosts.posts : props.pageProps]
 
     return (
@@ -86,12 +85,11 @@ function LatestPosts(props) {
     )
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: { latestPosts: any; }) => ({
     latestPosts: state.latestPosts
 });
 
 LatestPosts.getInitialProps = async function ({store}) {
-    debugger
     const posts = await postsAPI.getPosts();
     store.dispatch(getPosts())
 
