@@ -9,15 +9,6 @@
     "build": "next build",
     "start": "next start"
   },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "plugin:@typescript-eslint/recommended"
-    ]
-  },
   "dependencies": {
     "next": "^9.1.7",
     "next-redux-wrapper": "^4.0.1",
