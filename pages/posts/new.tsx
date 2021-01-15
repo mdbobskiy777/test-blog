@@ -3,7 +3,7 @@ import {Field, Form} from "react-final-form";
 import FormControlsCreator from "../../components/FormsControls/FormsControls";
 import {connect} from "react-redux";
 import {add_post_success, addPost} from "../../redux/actions/getPostsActions";
-import Link from "next/link";
+import Link from "next/Link";
 import {useEffect} from "react";
 
 

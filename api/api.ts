@@ -36,7 +36,7 @@ export const postsAPI = {
             body
         }).then(res=>res.data)
     },
-    deletePost(id){
+    deletePost(id:number){
         return instance.delete<PostsAIPDeletePostType>(`posts/${id}`)
     },
     updatePost(id:number,title:string, body:string){
