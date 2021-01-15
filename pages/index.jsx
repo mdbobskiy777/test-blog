@@ -26,7 +26,7 @@ import {useEffect} from "react";
     }
     componentDidMount() {
         debugger
-        if(!this.props.posts){
+        if(!this.props.latestPosts.posts){
             this.props.get_posts(this.props.pageProps)
         }
     }
@@ -57,12 +57,12 @@ import {useEffect} from "react";
 
 function LatestPosts(props) {
 
- /*   useEffect(() => {
+    useEffect(() => {
         debugger
             if (!props.latestPosts.posts) {
                 props.get_posts(props.pageProps)
             }
-    },[props.latestPosts.posts])*/
+    },[props.latestPosts.posts])
     debugger
     const actualProps = [...(props.latestPosts.posts) ? props.latestPosts.posts : props.pageProps]
 
