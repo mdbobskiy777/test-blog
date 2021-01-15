@@ -27,7 +27,7 @@ export const postsAPI = {
         return instance.post(`posts`,{
             title,
             body
-        })
+        }).then(res=>res.data)
     },
     deletePost(id){
         return instance.delete(`posts/${id}`)
