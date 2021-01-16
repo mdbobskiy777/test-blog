@@ -1,14 +1,20 @@
 import React from "react"
 import S from "./formsControl.module.css"
 
-const FormControlsCreator = Element => ({input, placeholder, meta}) => {
-    const hasError = meta.touched && meta.error;
+type PropsType = {
+    input:any,
+    placeholder:string,
+    meta:any
+}
+// eslint-disable-next-line react/display-name
+const FormControlsCreator = (Element:string)=> (props:PropsType):JSX.Element  => {
+    const hasError = props.meta.touched && props.meta.error;
     return (
         <div className={S.formControl + " " + (hasError ? S.error : " ")}>
             <div>
-                <Element  {...input} placeholder={placeholder}/>
+                <Element  {...props.input} placeholder={props.placeholder}/>
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{props.meta.error}</span>}
         </div>
     )
 }

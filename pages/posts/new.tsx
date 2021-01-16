@@ -10,7 +10,8 @@ import React, {useEffect} from "react";
 const Input = FormControlsCreator('input')
 
 
-function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSuccess: any; addPost: (arg0: any, arg1: any) => void; submitError: any; }) {
+function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSuccess: boolean;
+addPost: (arg0: any, arg1: any) => void; submitError: any; }) {
     useEffect(() => {
         return () => {
             props.add_post_success(false);
@@ -31,7 +32,7 @@ function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSucc
             <Form onSubmit={(form) => {
                 props.addPost(form.title, form.body);
             }}
-                  render={({submitError = props.submitError, handleSubmit, form}) => (
+                  render={({handleSubmit, form}):React.ReactNode => (
                       <form onSubmit={handleSubmit}>
                           <div>
                               <Field name="title" component={Input} placeholder="Post title"/>
@@ -41,7 +42,7 @@ function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSucc
                                      component={Input} placeholder="Post body"/>
                           </div>
                           <div>
-                              <button type="Submit">Submit</button>
+                              <button type="submit">Submit</button>
                           </div>
                       </form>
                   )}
@@ -51,7 +52,7 @@ function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSucc
     )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: { latestPosts: { addPostSuccess: boolean; }; }) => ({
     addPostSuccess: state.latestPosts.addPostSuccess
 })
 

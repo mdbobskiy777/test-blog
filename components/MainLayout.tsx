@@ -2,11 +2,15 @@ import Link from "next/Link"
 import Head from "next/head";
 import React from "react"
 
-export function MainLayout({children, title = 'Next App'}){
+/*type PropsType = {
+    title:string,
+    children:React.ReactChildren
+}*/
+export function MainLayout(props: { title: React.ReactNode; children: React.ReactNode; }){
     return (
-        <>
+        <div>
             <Head>
-                <title>{title}</title>
+                <title>{props.title}</title>
             </Head>
             <nav>
                 <Link href = {'/'}><a>Latest posts</a></Link>
@@ -14,7 +18,8 @@ export function MainLayout({children, title = 'Next App'}){
             <nav>
                 <Link href = {'/posts/new'}><a>Create new post</a></Link>
             </nav>
-            <main>{children}</main>
-        </>
+            <main>{props.children}</main>
+        </div>
     )
 }
+

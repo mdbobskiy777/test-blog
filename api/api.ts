@@ -6,7 +6,9 @@ type PostsAPIMyType = Array<PostType>
 type PostsAPIGetPostType = PostType
 type PostsAPICreateCommentType = CommentType
 type PostsAPICreatePostType = PostType
-type PostsAIPDeletePostType = {}
+
+type PostsAPIDeletePostType = Record<string, never>
+
 const instance = axios.create({
     baseURL: `https://simple-blog-api.crew.red/`,
     responseType: "json",
@@ -37,7 +39,7 @@ export const postsAPI = {
         }).then(res=>res.data)
     },
     deletePost(id:number){
-        return instance.delete<PostsAIPDeletePostType>(`posts/${id}`)
+        return instance.delete<PostsAPIDeletePostType>(`posts/${id}`)
     },
     updatePost(id:number,title:string, body:string){
         return instance.put<PostType>(`posts/${id}`, {

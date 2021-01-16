@@ -5,6 +5,9 @@ import {postsAPI} from "../api/api";
 import Link from "next/Link";
 import {MainLayout} from "../components/MainLayout";
 import {useEffect} from "react";
+import { CombinedState } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+import { InitialStateType, ActionsType } from '../redux/reducers/postsReducer';
 
 /*class LatestPosts extends React.Component {
 
@@ -55,13 +58,16 @@ import {useEffect} from "react";
 }*/
 
 
-function LatestPosts(props: { latestPosts: { posts: any; }; get_posts: (arg0: any) => void; pageProps: any; deletePost: (arg0: any) => void; }) {
+function LatestPosts(props: {
+    latestPosts: { posts: any; }; get_posts: (arg0: any) => void; pageProps: any;
+    deletePost: (arg0: any) => void;
+}) {
 
     useEffect(() => {
-            if (!props.latestPosts.posts) {
-                props.get_posts(props.pageProps)
-            }
-    },[props.latestPosts.posts])
+        if (!props.latestPosts.posts) {
+            props.get_posts(props.pageProps)
+        }
+    }, [props.latestPosts.posts])
 
     const actualProps = [...(props.latestPosts.posts) ? props.latestPosts.posts : props.pageProps]
 
@@ -89,9 +95,9 @@ const mapStateToProps = (state: { latestPosts: any; }) => ({
     latestPosts: state.latestPosts
 });
 
-LatestPosts.getInitialProps = async function ({store}) {
+LatestPosts.getInitialProps = async function (props: { store: { dispatch: (arg0: ThunkAction<Promise<void>, CombinedState<{ latestPosts: InitialStateType; }>, undefined, ActionsType>) => void; }; }) {
     const posts = await postsAPI.getPosts();
-    store.dispatch(getPosts())
+    props.store.dispatch(getPosts())
 
     return posts
 }
