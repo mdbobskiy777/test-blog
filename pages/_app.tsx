@@ -1,15 +1,12 @@
-import App, {AppInitialProps} from 'next/app';
+import {AppInitialProps} from 'next/app';
 import {Provider} from 'react-redux';
-import React, {ReactNode} from 'react';
-import withRedux, {MakeStore} from "next-redux-wrapper";
+import React from 'react';
+import withRedux from "next-redux-wrapper";
 import store, {StoreType} from '../redux/store';
-import {AppContextType, NextComponentType, NextPageContext} from "next/dist/next-server/lib/utils";
-import {Router} from "next/router";
-import {AppProps} from 'next/app'
 import {Store} from "redux";
 import {PostType} from "../redux/reducers/postsReducer";
 
-type MyAppType = {
+/*type MyAppType = {
     Component:any,
     store: any,
     ctx: {
@@ -44,6 +41,24 @@ class MyApp extends App<MyAppType> {
             </Provider>
         );
     }
+}*/
+
+function MyApp(props: { Component: any; pageProps: Array<PostType>; store: StoreType; }){
+        //Page props that were returned  from 'getInitialProps' are stored in the props i.e. pageprops
+        const {Component, pageProps, store} = props;
+
+        return (
+            <Provider store={store}>
+                <Component pageProps={pageProps}/>
+            </Provider>
+        );
+}
+MyApp.getInitialProps = async function (props: any): Promise<AppInitialProps> {
+
+    const pageProps = props.Component.getInitialProps ? await props.Component.getInitialProps(props.ctx) : {};
+
+    //Anything returned here can be accessed by the client
+    return {pageProps: pageProps};
 }
 
 //makeStore function that returns a new store for every request
