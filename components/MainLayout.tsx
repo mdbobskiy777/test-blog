@@ -6,7 +6,7 @@ import React from "react"
     title:string,
     children:React.ReactChildren
 }*/
-export function MainLayout(props: { title: React.ReactNode; children: React.ReactNode; }){
+export function MainLayout(props: { title: React.ReactNode; children: React.ReactNode; }):JSX.Element{
     return (
         <div>
             <Head>
