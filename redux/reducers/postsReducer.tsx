@@ -1,4 +1,4 @@
-import {ADD_COMMENT_SUCCESS, ADD_POST_SUCCESS, GET_LATEST_POSTS, GET_POST} from "../actions/getPostsActions";
+import {ADD_POST_SUCCESS, CLEAN_POST, GET_LATEST_POSTS, GET_POST} from "../actions/getPostsActions";
 
 export type CommentType = {
     id:number,
@@ -30,6 +30,9 @@ export type GetLatestPostsType = {
     type: typeof GET_LATEST_POSTS,
     posts: Array<PostType>
 }
+export type CleanPostType = {
+    type: typeof CLEAN_POST
+}
 export type GetPostType = {
     type: typeof GET_POST,
     post: PostType
@@ -39,7 +42,7 @@ export type AddPostSuccess = {
     addPostSuccess: boolean
 }
 
-export type ActionsType = GetLatestPostsType | GetPostType | AddPostSuccess
+export type ActionsType = GetLatestPostsType | GetPostType | AddPostSuccess | CleanPostType
 
 function postsReducer(state = initialState, action: ActionsType) : InitialStateType {
     switch (action.type) {
@@ -47,6 +50,8 @@ function postsReducer(state = initialState, action: ActionsType) : InitialStateT
             return {...state, posts: action.posts};
         case GET_POST:
             return {...state, post: action.post};
+            case CLEAN_POST:
+            return {...state, post: null};
         case ADD_POST_SUCCESS:
             return {...state, addPostSuccess: action.addPostSuccess};
    /*     case ADD_COMMENT_SUCCESS:

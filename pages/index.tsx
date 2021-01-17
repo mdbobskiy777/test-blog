@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {deletePost, get_posts, getPosts} from "../redux/actions/getPostsActions";
+import {clean_post, deletePost, get_posts, getPosts} from "../redux/actions/getPostsActions";
 import {postsAPI} from "../api/api";
 import Link from "next/Link";
 import {MainLayout} from "../components/MainLayout";
@@ -132,8 +132,11 @@ const PostsList = (props: PostListType): JSX.Element => {
 function LatestPosts(props: {
     latestPosts: { posts: any; }; get_posts: (arg0: any) => void; pageProps: any;
     deletePost: (arg0: any) => void;
+    clean_post:()=>void;
 }) {
-
+    useEffect(()=>{
+        props.clean_post()
+    },[])
     useEffect(() => {
         if (!props.latestPosts.posts) {
             props.get_posts(props.pageProps)
@@ -163,7 +166,8 @@ LatestPosts.getInitialProps = async function (props: { store: { dispatch: (arg0:
 
 const mapDispatchToProps = ({
     get_posts: get_posts,
-    deletePost: deletePost
+    deletePost: deletePost,
+    clean_post:clean_post
 });
 export default connect(mapStateToProps, mapDispatchToProps)(LatestPosts)
 

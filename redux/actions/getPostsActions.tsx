@@ -1,7 +1,7 @@
 import {postsAPI} from "../../api/api";
 import {
     ActionsType,
-    AddPostSuccess,
+    AddPostSuccess, CleanPostType,
     GetLatestPostsType,
     GetPostType,
     PostType
@@ -11,6 +11,7 @@ import {AppStateType} from "../reducers/rootReducer";
 
 export const GET_LATEST_POSTS = "GET_LATEST_POSTS"
 export const GET_POST = "GET_POST"
+export const CLEAN_POST = "CLEAN_POST"
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS"
 export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS"
 
@@ -19,6 +20,9 @@ export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS"
 export const get_posts = (posts: Array<PostType>): GetLatestPostsType => ({
     type: GET_LATEST_POSTS,
     posts: posts,
+})
+export const clean_post = (): CleanPostType => ({
+    type: CLEAN_POST
 })
 export const get_post = (post: PostType): GetPostType => ({
     type: GET_POST,
