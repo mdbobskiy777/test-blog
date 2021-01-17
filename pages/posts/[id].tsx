@@ -1,4 +1,3 @@
-import {useRouter} from "next/router";
 import {MainLayout} from "../../components/MainLayout";
 import {postsAPI} from "../../api/api";
 import {/*add_comment_success,*/ addComment, getPost} from "../../redux/actions/getPostsActions";
@@ -7,25 +6,57 @@ import React, {useEffect} from "react";
 import {Field, Form} from "react-final-form";
 import FormControlsCreator from "../../components/FormsControls/FormsControls";
 import {CommentType, PostType} from "../../redux/reducers/postsReducer";
+import styled from "styled-components";
 
-const Input = FormControlsCreator('input')
+
+const MyUL = styled.ul`
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 5px;
+  border: 1px solid black;
+
+`
+
+const MyBtn = styled.button`
+  border: 1px solid black;
+
+`
+
+const MyLI = styled.li`
+  background: gray;
+  margin: 5px auto;
+  border: 1px solid black;
+`
+const FormContainer = styled.div`
+  margin: 10px;
+  border: 1px solid black;
+
+`
+const MyInput = styled.textarea`
+  wrap-option: soft;
+  width: 30%;
+  min-height: 50px;
+  resize: none;
+  border: 1px solid black;
+
+`
+const MyCommentInput = FormControlsCreator(MyInput)
 
 type GetInitialPropsType = {
-    AppTree:any,
-    asPath:string,
-    isServer:boolean,
-    pathName:string,
-    query:{
-        id:number
+    AppTree: any,
+    asPath: string,
+    isServer: boolean,
+    pathName: string,
+    query: {
+        id: number
     },
-    store:any
+    store: any
 }
 
 function Post(props: {
     getPost: (arg0: any) => void; pageProps: { id: any; }; post: any;
     addComment: (arg0: any, arg1: any) => void; submitError: any;
 }) {
-    // НЕ НОРМ ШО Я ДЕЛАЮ ПО 2 ЗАПРОСА
     useEffect(() => {
         return () => {
             {
@@ -37,9 +68,7 @@ function Post(props: {
         }
     })
 
-    console.log(props.pageProps)
     const actualProps = {...(props.post) ? props.post : props.pageProps}
-    console.log("ACTUAL PROPS ")
     console.log(actualProps)
     return (
         <MainLayout title={`Blog | Post ${actualProps.id}`}>
@@ -48,9 +77,9 @@ function Post(props: {
             <p>{actualProps.body}</p>
             <hr/>
             <h2>Comments: </h2>
-            <ul>{(actualProps.comments) && actualProps.comments.map((comment: CommentType, i: number) => {
-                return <li key={i}>{comment.body}</li>
-            })}</ul>
+            <MyUL>{(actualProps.comments) && actualProps.comments.map((comment: CommentType, i: number) => {
+                return <MyLI key={i}>{comment.body}</MyLI>
+            })}</MyUL>
 
             <Form onSubmit={(form) => {
                 props.addComment(actualProps.id, form.comment)
@@ -58,12 +87,14 @@ function Post(props: {
             }}
                   render={({submitError = props.submitError, handleSubmit, form}) => (
                       <form onSubmit={handleSubmit}>
-                          <div>
-                              <Field name="comment" component={Input} placeholder="Write comment"/>
-                          </div>
-                          <div>
-                              <button type="submit">Create comment</button>
-                          </div>
+                          <FormContainer>
+                              <div>
+                                  <Field name="comment" component={MyCommentInput} placeholder="Write comment"/>
+                              </div>
+                              <div>
+                                  <MyBtn type="submit">Create comment</MyBtn>
+                              </div>
+                          </FormContainer>
                       </form>
                   )}
             >
@@ -72,12 +103,10 @@ function Post(props: {
     )
 }
 
-Post.getInitialProps = async (props: GetInitialPropsType):Promise<PostType> => {
-    console.log(props)
-    const post = await postsAPI.getPost(props.query.id);
-    console.log(post)
-    props.store.dispatch(getPost(props.query.id))
+Post.getInitialProps = async (props: GetInitialPropsType): Promise<PostType> => {
 
+    const post = await postsAPI.getPost(props.query.id);
+    props.store.dispatch(getPost(props.query.id))
     return post
 }
 

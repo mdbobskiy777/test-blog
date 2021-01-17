@@ -61,32 +61,40 @@ import styled from 'styled-components';
 const MyUL = styled.ul`
   list-style-type: none;
   margin: 0 auto;
-  background: red;
   padding: 5px;
+  border: 1px solid;
+
 `
 const MyA = styled.a`
-  color: #eaeaea;
+  color: black;
+  border: 1px solid;
+
 `
 const MyBtn = styled.button`
   color: red;
+  border: 1px solid black;
+
 `
 const MyDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: chocolate;
+  background: darkgray;
   max-width: 500px;
   height: 50px;
   margin: 5px;
+  border: 1px solid;
+
 `
 const MyH1 = styled.h1`
   padding: 10px;
+  border: 1px solid;
+
 `
 
 const MyLI = styled.li`
-  background: gray;
   margin-left: 10px;
-
+  border: 1px solid;
 `
 type PostListType = {
     posts: Array<PostType>,

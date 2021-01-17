@@ -18,19 +18,25 @@ const MyNav = styled.nav`
   max-width: 1280px;
   padding: 5px;
   margin: 0 auto;
+  border: 1px solid;
 `
 const MyDiv = styled.div`
   max-width: 1280px;
   margin: 0 auto;
-  background: #e5eff5;
   padding: 5px;
+  border: 1px solid;
+
 `
 const MyDivContainer = styled.div`
-  background: gray;
   min-height: 600px;
+  background: #e5eff5;
+  border: 1px solid;
+
 `
 
 const MyA = styled.a`
+  border: 1px solid;
+
 `
 
 export function MainLayout(props: { title: React.ReactNode; children: React.ReactNode; }): JSX.Element {
