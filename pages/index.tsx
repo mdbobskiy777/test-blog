@@ -5,9 +5,10 @@ import {postsAPI} from "../api/api";
 import Link from "next/Link";
 import {MainLayout} from "../components/MainLayout";
 import {useEffect} from "react";
-import { CombinedState } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-import { InitialStateType, ActionsType } from '../redux/reducers/postsReducer';
+import {CombinedState} from 'redux';
+import {ThunkAction} from 'redux-thunk';
+import {InitialStateType, ActionsType, PostType} from '../redux/reducers/postsReducer';
+import styled from 'styled-components';
 
 /*class LatestPosts extends React.Component {
 
@@ -57,6 +58,58 @@ import { InitialStateType, ActionsType } from '../redux/reducers/postsReducer';
     }
 }*/
 
+const MyUL = styled.ul`
+  list-style-type: none;
+  margin: 0 auto;
+  background: red;
+  padding: 5px;
+`
+const MyA = styled.a`
+  color: #eaeaea;
+`
+const MyBtn = styled.button`
+  color: red;
+`
+const MyDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: chocolate;
+  max-width: 500px;
+  height: 50px;
+  margin: 5px;
+`
+const MyH1 = styled.h1`
+  padding: 10px;
+`
+
+const MyLI = styled.li`
+  background: gray;
+  margin-left: 10px;
+
+`
+type PostListType = {
+    posts: Array<PostType>,
+    deletePost: (arg0: any) => void;
+}
+
+const PostsList = (props: PostListType): JSX.Element => {
+    return (
+        <MyUL>
+            {props.posts.map((post, i) => (
+                <MyDiv key={i}>
+                    <MyLI key={post.id}>
+                        <Link href={`/posts/[id]`} as={`/posts/${post.id}`}><MyA>{post.title}</MyA></Link>
+                    </MyLI>
+                    <MyBtn onClick={() => {
+                        props.deletePost(post.id)
+                    }}>X
+                    </MyBtn>
+                </MyDiv>
+            ))}
+        </MyUL>
+    )
+}
 
 function LatestPosts(props: {
     latestPosts: { posts: any; }; get_posts: (arg0: any) => void; pageProps: any;
@@ -73,20 +126,8 @@ function LatestPosts(props: {
 
     return (
         <MainLayout title={'Blog | Latest Posts'}>
-            <div>Latest posts</div>
-            <ul>
-                {actualProps.map((post, i) => (
-                    <div key={i}>
-                        <li key={post.id}>
-                            <Link href={`/posts/[id]`} as={`/posts/${post.id}`}><a>{post.title}</a></Link>
-                        </li>
-                        <button onClick={() => {
-                            props.deletePost(post.id)
-                        }}>X
-                        </button>
-                    </div>
-                ))}
-            </ul>
+            <MyH1>Latest posts</MyH1>
+            <PostsList posts={actualProps} deletePost={props.deletePost}/>
         </MainLayout>
     )
 }
