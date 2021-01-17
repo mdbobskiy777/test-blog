@@ -13,11 +13,11 @@ const MyNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: darkgray;
+  background: white;
   font-size: 1.25em;
   max-width: 1280px;
   padding: 5px;
-  margin: 0 auto;
+  margin: 5px auto;
   border: 1px solid;
 `
 const MyDiv = styled.div`
@@ -30,23 +30,31 @@ const MyDiv = styled.div`
 const MyDivContainer = styled.div`
   min-height: 600px;
   background: #e5eff5;
-  border: 1px solid;
-
 `
 
 const MyA = styled.a`
-  border: 1px solid;
 
+`
+const MyNavDiv = styled.div`
+  border: 1px solid;
+  padding: 5px;
+  background: #e5eff5;
+  font-size: 1.25em;
 `
 
 export function MainLayout(props: { title: React.ReactNode; children: React.ReactNode; }): JSX.Element {
     return (
         <MyDivContainer>
             <MyNav>
-                <Link href={'/'}><MyA>Latest posts</MyA></Link>
-                <Link href={'/posts/new'}><MyA>Create new post</MyA></Link>
+                <MyNavDiv>
+                    <Link href={'/'}><MyA>Latest posts</MyA></Link>
+                </MyNavDiv>
+                <MyNavDiv>
+                    <Link href={'/posts/new'}><MyA>Create new post</MyA></Link>
+                </MyNavDiv>
             </MyNav>
             <MyDiv>
+
                 <Head>
                     <title>{props.title}</title>
                 </Head>

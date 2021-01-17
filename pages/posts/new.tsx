@@ -25,20 +25,9 @@ const MyBtnContainer = styled.div`
   margin: 10px;
 
 `
-const MyBackDiv = styled.div`
-  background: darkgray;
-  width: 400px;
-  margin: 10px auto;
+const MyBtn = styled.button`
   padding: 10px;
-`
-const MyH1 = styled.h1`
-  padding: 10px;
-`
-const MyA = styled.a`
-`
-const MyDivContainer = styled.div`
-  margin: 0 auto;
-  padding: 5px;
+  font-size: 1em;
 `
 const MyInputTitle = FormControlsCreator(MyTitle)
 const MyInputBody = FormControlsCreator(MyBody)
@@ -73,7 +62,7 @@ function NewPost(props: {
                                      component={MyInputBody} placeholder="Post body"/>
                           </div>
                           <MyBtnContainer>
-                              <button type="submit">Submit</button>
+                              <MyBtn type="submit">Create post</MyBtn>
                           </MyBtnContainer>
                       </form>
                   )}

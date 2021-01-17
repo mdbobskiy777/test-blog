@@ -14,24 +14,32 @@ const MyUL = styled.ul`
   margin: 0 auto;
   padding: 5px;
   border: 1px solid black;
+  background: white;
+
 
 `
 
 const MyBtn = styled.button`
-  border: 1px solid black;
-
+  padding: 10px;
+  font-size: 1em;
+  margin: 10px auto;
+`
+const MyH1 = styled.h1`
+  padding: 5px;
+  margin: 0 auto;
 `
 
 const MyLI = styled.li`
-  background: gray;
   margin: 5px auto;
   border: 1px solid black;
+  background: #e5eff5;
+  padding: 5px;
 `
-const FormContainer = styled.div`
+const MyFormContainer = styled.div`
   margin: 10px;
-  border: 1px solid black;
 
 `
+
 const MyInput = styled.textarea`
   wrap-option: soft;
   width: 30%;
@@ -40,6 +48,25 @@ const MyInput = styled.textarea`
   border: 1px solid black;
 
 `
+const MyTitle = styled.div`
+  margin: 5px auto;
+  border: 1px solid black;
+  padding: 5px;
+  background: white;
+
+`
+const MyDiv = styled.div`
+  margin: 5px auto;
+  padding: 5px;
+
+`
+const MyBody = styled.div`
+  margin: 5px auto;
+  border: 1px solid black;
+  padding: 15px;
+  background: white;
+`
+
 const MyCommentInput = FormControlsCreator(MyInput)
 
 type GetInitialPropsType = {
@@ -72,10 +99,12 @@ function Post(props: {
     console.log(actualProps)
     return (
         <MainLayout title={`Blog | Post ${actualProps.id}`}>
-            <h1>{actualProps.title}</h1>
-            <hr/>
-            <p>{actualProps.body}</p>
-            <hr/>
+            <MyTitle>
+                <MyH1>{actualProps.title}</MyH1>
+            </MyTitle>
+            <MyBody>
+                <p>{actualProps.body}</p>
+            </MyBody>
             <h2>Comments: </h2>
             <MyUL>{(actualProps.comments) && actualProps.comments.map((comment: CommentType, i: number) => {
                 return <MyLI key={i}>{comment.body}</MyLI>
@@ -87,14 +116,14 @@ function Post(props: {
             }}
                   render={({submitError = props.submitError, handleSubmit, form}) => (
                       <form onSubmit={handleSubmit}>
-                          <FormContainer>
-                              <div>
+                          <MyFormContainer>
+                              <MyDiv>
                                   <Field name="comment" component={MyCommentInput} placeholder="Write comment"/>
-                              </div>
-                              <div>
+                              </MyDiv>
+                              <MyDiv>
                                   <MyBtn type="submit">Create comment</MyBtn>
-                              </div>
-                          </FormContainer>
+                              </MyDiv>
+                          </MyFormContainer>
                       </form>
                   )}
             >
