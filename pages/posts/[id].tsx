@@ -23,6 +23,9 @@ const MyBtn = styled.button`
   padding: 10px;
   font-size: 1em;
   margin: 10px auto;
+  background-color: lightblue;
+  border-radius: 5px;
+
 `
 const MyH1 = styled.h1`
   padding: 5px;
@@ -32,8 +35,10 @@ const MyH1 = styled.h1`
 const MyLI = styled.li`
   margin: 5px auto;
   border: 1px solid black;
-  background: #e5eff5;
+  background-color: lightblue;
   padding: 5px;
+  border-radius: 5px;
+
 `
 const MyFormContainer = styled.div`
   margin: 10px;

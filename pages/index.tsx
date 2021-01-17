@@ -82,7 +82,9 @@ const MyDiv = styled.div`
   margin: 5px auto;
   border: 1px solid;
   padding-right: 10px;
-  background: #e5eff5;
+  background-color: lightblue;
+  border-radius: 5px;
+
 `
 const MyH1 = styled.h1`
   background: white;

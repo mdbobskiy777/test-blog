@@ -40,6 +40,8 @@ const MyNavDiv = styled.div`
   padding: 5px;
   background: #e5eff5;
   font-size: 1.25em;
+  border-radius: 5px;
+
 `
 
 export function MainLayout(props: { title: React.ReactNode; children: React.ReactNode; }): JSX.Element {

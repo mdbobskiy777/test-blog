@@ -28,6 +28,9 @@ const MyBtnContainer = styled.div`
 const MyBtn = styled.button`
   padding: 10px;
   font-size: 1em;
+  background-color: lightblue;
+  border-radius: 5px;
+
 `
 const MyInputTitle = FormControlsCreator(MyTitle)
 const MyInputBody = FormControlsCreator(MyBody)
