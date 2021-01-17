@@ -71,7 +71,7 @@ const MyA = styled.a`
 const MyBtn = styled.button`
   color: red;
   border: 1px solid black;
-
+  border-radius: 5px;
 `
 const MyDiv = styled.div`
   display: flex;
