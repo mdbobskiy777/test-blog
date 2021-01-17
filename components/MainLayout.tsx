@@ -3,10 +3,10 @@ import Head from "next/head";
 import React from "react"
 import styled from 'styled-components';
 
-/*type PropsType = {
-    title:string,
-    children:React.ReactChildren
-}*/
+type PropsType = {
+    title: React.ReactNode,
+    children:React.ReactNode
+}
 
 
 const MyNav = styled.nav`
@@ -44,7 +44,7 @@ const MyNavDiv = styled.div`
 
 `
 
-export function MainLayout(props: { title: React.ReactNode; children: React.ReactNode; }): JSX.Element {
+export function MainLayout(props:PropsType ): JSX.Element {
     return (
         <MyDivContainer>
             <MyNav>

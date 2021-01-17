@@ -1,14 +1,12 @@
 import {MainLayout} from "../../components/MainLayout";
 import {postsAPI} from "../../api/api";
-import {/*add_comment_success,*/ addComment, getPost} from "../../redux/actions/getPostsActions";
-import {connect, useDispatch} from "react-redux";
+import {addComment, getPost} from "../../redux/actions/getPostsActions";
+import {connect} from "react-redux";
 import React, {useEffect} from "react";
 import {Field, Form} from "react-final-form";
 import FormControlsCreator from "../../components/FormsControls/FormsControls";
 import {CommentType, PostType} from "../../redux/reducers/postsReducer";
 import styled from "styled-components";
-import {useRouter} from "next/router";
-
 
 const MyUL = styled.ul`
   list-style-type: none;
@@ -90,16 +88,6 @@ function Post(props: {
     getPost: (arg0: any) => void; clean_post: () => void; pageProps: { id: any; }; post: any;
     addComment: (arg0: any, arg1: any) => void; submitError: any;
 }) {
-    useEffect(() => {
-        return () => {
-            {
-                /*
-                                props.add_comment_success(false)
-                */
-            }
-        }
-    })
-
     const actualProps = {...(props.post) ? props.post : props.pageProps}
     console.log(actualProps)
     return (
@@ -145,9 +133,6 @@ Post.getInitialProps = async (props: GetInitialPropsType): Promise<PostType> => 
 }
 
 const mapStateToProps = (state: { latestPosts: { post: any; }; }) => ({
-    /*
-        addCommentSuccess: state.latestPosts.addCommentSuccess,
-    */
     post: state.latestPosts.post,
 })
-export default connect(mapStateToProps, {addComment /*add_comment_success,*/ , getPost})(Post)
+export default connect(mapStateToProps, {addComment, getPost})(Post)
