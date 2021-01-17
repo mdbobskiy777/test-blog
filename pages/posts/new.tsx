@@ -1,16 +1,45 @@
 import {MainLayout} from "../../components/MainLayout";
 import {Field, Form} from "react-final-form";
-import FormControlsCreator from "../../components/FormsControls/FormsControls";
 import {connect} from "react-redux";
 import {add_post_success, addPost} from "../../redux/actions/getPostsActions";
-import Link from "next/Link";
 import React, {useEffect} from "react";
+import styled from 'styled-components';
+import FormControlsCreator from "../../components/FormsControls/FormsControls";
+import {useRouter} from 'next/router'
+
+const MyTitle = styled.textarea`
+  wrap-option: soft;
+  width: 30%;
+  min-height: 50px;
+  resize: none;
+  margin: 10px;
+`
+const MyBody = styled.textarea`
+  wrap-option: soft;
+  width: 80%;
+  min-height: 200px;
+  resize: none;
+  margin: 10px;
+`
+const MyBtnContainer = styled.div`
+  margin: 10px;
+
+`
+const MyBtn = styled.button`
+  padding: 10px;
+  font-size: 1em;
+  background-color: lightblue;
+  border-radius: 5px;
+
+`
+const MyInputTitle = FormControlsCreator(MyTitle)
+const MyInputBody = FormControlsCreator(MyBody)
 
 
-const Input = FormControlsCreator('input')
-
-
-function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSuccess: any; addPost: (arg0: any, arg1: any) => void; submitError: any; }) {
+function NewPost(props: {
+    add_post_success: (arg0: boolean) => void; addPostSuccess: boolean;
+    addPost: (arg0: any, arg1: any) => void; submitError: any;
+}) {
     useEffect(() => {
         return () => {
             props.add_post_success(false);
@@ -18,31 +47,26 @@ function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSucc
 
     }, [])
     if (props.addPostSuccess) {
-        return (
-            <div>
-                <div>New Post added</div>
-                <Link href={'/'}><a>Back to latest posts</a></Link>
-            </div>
-        )
-
+        const router = useRouter()
+        router.push("/")
     }
     return (
         <MainLayout title={`Blog | New post`}>
             <Form onSubmit={(form) => {
                 props.addPost(form.title, form.body);
             }}
-                  render={({submitError = props.submitError, handleSubmit, form}) => (
+                  render={({handleSubmit, form}): React.ReactNode => (
                       <form onSubmit={handleSubmit}>
                           <div>
-                              <Field name="title" component={Input} placeholder="Post title"/>
+                              <Field name="title" component={MyInputTitle} placeholder="Post title"/>
                           </div>
                           <div>
                               <Field name="body"
-                                     component={Input} placeholder="Post body"/>
+                                     component={MyInputBody} placeholder="Post body"/>
                           </div>
-                          <div>
-                              <button type="Submit">Submit</button>
-                          </div>
+                          <MyBtnContainer>
+                              <MyBtn type="submit">Create post</MyBtn>
+                          </MyBtnContainer>
                       </form>
                   )}
             >
@@ -51,8 +75,7 @@ function NewPost(props: { add_post_success: (arg0: boolean) => void; addPostSucc
     )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: { latestPosts: { addPostSuccess: boolean; }; }) => ({
     addPostSuccess: state.latestPosts.addPostSuccess
 })
-
 export default connect(mapStateToProps, {addPost, add_post_success})(NewPost)

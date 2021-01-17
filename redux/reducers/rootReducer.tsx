@@ -5,5 +5,5 @@ const rootReducer = combineReducers({
     latestPosts: postsReducer
 });
 type ReducerType = typeof rootReducer
-export type AppStoreType = ReturnType<ReducerType>
+export type AppStateType = ReturnType<ReducerType>
 export default rootReducer;
