@@ -1,12 +1,13 @@
 import {MainLayout} from "../../components/MainLayout";
 import {postsAPI} from "../../api/api";
-import {addComment, getPost} from "../../redux/actions/getPostsActions";
-import {connect} from "react-redux";
-import React, {useEffect} from "react";
+import {getPost} from "../../redux/actions/getPostsActions";
+import {useDispatch, useSelector} from "react-redux";
+import React from "react";
 import {Field, Form} from "react-final-form";
 import FormControlsCreator from "../../components/FormsControls/FormsControls";
 import {CommentType, PostType} from "../../redux/reducers/postsReducer";
 import styled from "styled-components";
+import {AppStateType} from "../../redux/reducers/rootReducer";
 
 const MyUL = styled.ul`
   list-style-type: none;
@@ -14,8 +15,6 @@ const MyUL = styled.ul`
   padding: 5px;
   border: 1px solid black;
   background: white;
-
-
 `
 
 const MyBtn = styled.button`
@@ -30,7 +29,6 @@ const MyH1 = styled.h1`
   padding: 5px;
   margin: 0 auto;
 `
-
 const MyLI = styled.li`
   margin: 5px auto;
   border: 1px solid black;
@@ -43,7 +41,6 @@ const MyFormContainer = styled.div`
   margin: 10px;
 
 `
-
 const MyInput = styled.textarea`
   wrap-option: soft;
   width: 30%;
@@ -84,11 +81,14 @@ type GetInitialPropsType = {
     store: any
 }
 
-function Post(props: {
-    getPost: (arg0: any) => void; clean_post: () => void; pageProps: { id: any; }; post: any;
-    addComment: (arg0: any, arg1: any) => void; submitError: any;
-}) {
-    const actualProps = {...(props.post) ? props.post : props.pageProps}
+type PostTypeProps = {
+    pageProps:PostType
+}
+function Post(props: PostTypeProps) {
+     const postSelector = useSelector((state: AppStateType) => state.latestPosts.post)
+    const dispatch = useDispatch()
+
+    const actualProps = {...(postSelector) ? postSelector : props.pageProps}
     console.log(actualProps)
     return (
         <MainLayout title={`Blog | Post ${actualProps.id}`}>
@@ -103,11 +103,14 @@ function Post(props: {
                 return <MyLI key={i}>{comment.body}</MyLI>
             })}</MyUL>
 
-            <Form onSubmit={(form) => {
-                props.addComment(actualProps.id, form.comment)
+            <Form onSubmit={async (form) => {
+
+                await postsAPI.createComment(actualProps.id, form.comment)
+                dispatch(getPost(actualProps.id))
+
                 form.comment = ""
             }}
-                  render={({submitError = props.submitError, handleSubmit, form}) => (
+                  render={({handleSubmit, form}) => (
                       <form onSubmit={handleSubmit}>
                           <MyFormContainer>
                               <MyDiv>
@@ -126,13 +129,9 @@ function Post(props: {
 }
 
 Post.getInitialProps = async (props: GetInitialPropsType): Promise<PostType> => {
-
     const post = await postsAPI.getPost(props.query.id);
     props.store.dispatch(getPost(props.query.id))
     return post
 }
 
-const mapStateToProps = (state: { latestPosts: { post: any; }; }) => ({
-    post: state.latestPosts.post,
-})
-export default connect(mapStateToProps, {addComment, getPost})(Post)
+export default Post
