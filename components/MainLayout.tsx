@@ -1,4 +1,4 @@
-import Link from "../node_modules/next/Link";
+import Link from "next/Link";
 import Head from "next/head";
 import React from "react"
 import styled from 'styled-components';
