@@ -2,7 +2,7 @@
   "name": "test-blog",
   "version": "0.1.0",
   "private": true,
-  "description": "",
+  "description": "This is Eugene Bober`s test project",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -10,18 +10,41 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "final-form": "^4.20.1",
     "next": "^9.1.7",
     "next-redux-wrapper": "^4.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-final-form": "^6.5.2",
-    "final-form": "^4.20.1",
     "react-redux": "^7.1.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "axios": "^0.21.1"
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.8"
-  }
+    "@types/node": "^14.14.21",
+    "@types/react": "^17.0.0",
+    "@types/react-redux": "^7.1.15",
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
+    "eslint": "^7.17.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "redux-devtools-extension": "^2.13.8",
+    "typescript": "^4.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdbobskiy777/test-blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdbobskiy777/test-blog/issues"
+  },
+  "homepage": "https://github.com/mdbobskiy777/test-blog#readme"
 }
