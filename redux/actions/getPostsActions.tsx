@@ -14,7 +14,6 @@ export const GET_POST = "GET_POST"
 export const CLEAN_POST = "CLEAN_POST"
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS"
 
-//Action Creator
 export const get_posts = (posts: Array<PostType>): GetLatestPostsType => ({
     type: GET_LATEST_POSTS,
     posts: posts,
