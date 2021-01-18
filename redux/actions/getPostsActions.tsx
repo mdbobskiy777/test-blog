@@ -35,8 +35,8 @@ export const add_post_success = (isAdd: boolean): AddPostSuccess => ({
 export const addPost = (title: string, body: string): ThunkAction<Promise<void>, AppStateType, undefined, ActionsType> =>
     async (dispatch) => {
 
-        const responce = await postsAPI.createPost(title, body);
-        if (responce) {
+        const response = await postsAPI.createPost(title, body);
+        if (response) {
             dispatch(add_post_success(true))
         }
 
@@ -51,13 +51,12 @@ export const deletePost = (id: number): ThunkAction<Promise<void>, AppStateType,
 
 export const addComment = (id: number, text: string): ThunkAction<Promise<void>, AppStateType, undefined, ActionsType> =>
     async (dispatch) => {
-
-        const response = await postsAPI.createComment(id, text);
+        await postsAPI.createComment(id, text);
+        await dispatch(getPost(id))
     }
 
 export const getPosts = (): ThunkAction<Promise<void>, AppStateType, undefined, ActionsType> =>
     async (dispatch) => {
-
         const posts = await postsAPI.getPosts();
         dispatch(get_posts(posts))
     }

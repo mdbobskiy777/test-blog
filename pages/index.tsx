@@ -1,16 +1,14 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-    CLEAN_POST,
-    GET_LATEST_POSTS,
-    getPosts
+    clean_post, deletePost, get_posts, getPosts
 } from "../redux/actions/getPostsActions";
 import {postsAPI} from "../api/api";
 import Link from "next/Link";
 import {MainLayout} from "../components/MainLayout";
 import {useEffect} from "react";
-import {CombinedState} from 'redux';
-import {ThunkAction} from 'redux-thunk';
+import {AnyAction, CombinedState} from 'redux';
+import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {
     InitialStateType,
     ActionsType,
@@ -24,7 +22,7 @@ import {AppStateType} from "../redux/reducers/rootReducer";
 type PostListType = {
     posts: Array<PostType>,
     deletePost: (id: number) => ThunkAction<Promise<void>, AppStateType, undefined, ActionsType>,
-    dispatch: any
+    dispatch: ThunkDispatch<AppStateType, any, AnyAction>
 }
 
 type LatestPostsProps = {
@@ -98,9 +96,7 @@ const PostsList = (props: PostListType): JSX.Element => {
                     </div>
                     <MyBtnContainer>
                         <MyBtn onClick={async () => {
-                            await postsAPI.deletePost(post.id);
-                            const posts = await postsAPI.getPosts();
-                            props.dispatch({type: GET_LATEST_POSTS, posts: posts})
+                            await props.dispatch(deletePost(post.id))
                         }}>X
                         </MyBtn>
                     </MyBtnContainer>
@@ -118,12 +114,12 @@ function LatestPosts(props: LatestPostsProps) {
 
     useEffect(() => {
 
-        dispatch({type: CLEAN_POST})
+        dispatch(clean_post())
 
     }, [])
     useEffect(() => {
         if (!latestPostsSelector.posts) {
-            dispatch({type: GET_LATEST_POSTS, posts: props.pageProps})
+            dispatch(get_posts(props.pageProps))
         }
     }, [latestPostsSelector.posts])
 

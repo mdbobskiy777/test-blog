@@ -1,6 +1,6 @@
 import {MainLayout} from "../../components/MainLayout";
 import {postsAPI} from "../../api/api";
-import {getPost} from "../../redux/actions/getPostsActions";
+import {addComment, getPost} from "../../redux/actions/getPostsActions";
 import {useDispatch, useSelector} from "react-redux";
 import React from "react";
 import {Field, Form} from "react-final-form";
@@ -10,7 +10,7 @@ import styled from "styled-components";
 import {AppStateType} from "../../redux/reducers/rootReducer";
 
 type PostTypeProps = {
-    pageProps:PostType
+    pageProps: PostType
 }
 
 const MyUL = styled.ul`
@@ -87,11 +87,11 @@ type GetInitialPropsType = {
 
 
 function Post(props: PostTypeProps) {
-     const postSelector = useSelector((state: AppStateType) => state.latestPosts.post)
+    const postSelector = useSelector((state: AppStateType) => state.latestPosts.post)
     const dispatch = useDispatch()
 
     const actualProps = {...(postSelector) ? postSelector : props.pageProps}
-    console.log(actualProps)
+
     return (
         <MainLayout title={`Blog | Post ${actualProps.id}`}>
             <MyTitle>
@@ -106,10 +106,7 @@ function Post(props: PostTypeProps) {
             })}</MyUL>
 
             <Form onSubmit={async (form) => {
-
-                await postsAPI.createComment(actualProps.id, form.comment)
-                dispatch(getPost(actualProps.id))
-
+                dispatch(addComment(actualProps.id,form.comment))
                 form.comment = ""
             }}
                   render={({handleSubmit, form}) => (

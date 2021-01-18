@@ -1,13 +1,12 @@
 import {MainLayout} from "../../components/MainLayout";
 import {Field, Form} from "react-final-form";
 import {useDispatch, useSelector} from "react-redux";
-import {ADD_POST_SUCCESS} from "../../redux/actions/getPostsActions";
+import {add_post_success, addPost} from "../../redux/actions/getPostsActions";
 import React, {useEffect} from "react";
 import styled from 'styled-components';
 import FormControlsCreator from "../../components/FormsControls/FormsControls";
 import {useRouter} from 'next/router'
 import {AppStateType} from "../../redux/reducers/rootReducer";
-import {postsAPI} from "../../api/api";
 
 const MyTitle = styled.textarea`
   wrap-option: soft;
@@ -44,10 +43,7 @@ function NewPost() {
 
     useEffect(() => {
         return () => {
-            dispatch({
-                type: ADD_POST_SUCCESS,
-                addPostSuccess: false
-            })
+            dispatch(add_post_success(false))
         }
 
     }, [])
@@ -58,13 +54,7 @@ function NewPost() {
     return (
         <MainLayout title={`Blog | New post`}>
             <Form onSubmit={async (form) => {
-                const response = await postsAPI.createPost(form.title, form.body);
-                if (response) {
-                    dispatch({
-                        type: ADD_POST_SUCCESS,
-                        addPostSuccess: true
-                    })
-                }
+                dispatch(addPost(form.title, form.body));
             }}
                   render={({handleSubmit, form}): React.ReactNode => (
                       <form onSubmit={handleSubmit}>
