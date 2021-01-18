@@ -13,8 +13,6 @@ export const GET_LATEST_POSTS = "GET_LATEST_POSTS"
 export const GET_POST = "GET_POST"
 export const CLEAN_POST = "CLEAN_POST"
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS"
-export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS"
-
 
 //Action Creator
 export const get_posts = (posts: Array<PostType>): GetLatestPostsType => ({
@@ -33,10 +31,6 @@ export const add_post_success = (isAdd: boolean): AddPostSuccess => ({
     addPostSuccess: isAdd
 })
 
-/*export const add_comment_success = (isAdd) => ({
-    type: ADD_COMMENT_SUCCESS,
-    addCommentSuccess:isAdd
-})*/
 
 export const addPost = (title: string, body: string): ThunkAction<Promise<void>, AppStateType, undefined, ActionsType> =>
     async (dispatch) => {
@@ -58,28 +52,18 @@ export const deletePost = (id: number): ThunkAction<Promise<void>, AppStateType,
 export const addComment = (id: number, text: string): ThunkAction<Promise<void>, AppStateType, undefined, ActionsType> =>
     async (dispatch) => {
 
-        const responce = await postsAPI.createComment(id, text);
-        /*   if(responce){
-               dispatch(add_comment_success(true))
-           }*/
-
+        const response = await postsAPI.createComment(id, text);
     }
 
 export const getPosts = (): ThunkAction<Promise<void>, AppStateType, undefined, ActionsType> =>
     async (dispatch) => {
 
         const posts = await postsAPI.getPosts();
-        /*
-            return dispatch(get_posts(posts))
-        */
         dispatch(get_posts(posts))
     }
-export const getPost = (id:number): ThunkAction<Promise<void>, AppStateType, undefined, ActionsType> =>
+export const getPost = (id: number): ThunkAction<Promise<void>, AppStateType, undefined, ActionsType> =>
     async (dispatch) => {
 
         const post = await postsAPI.getPost(id);
-        /*
-            return dispatch(get_post(post))
-        */
         dispatch(get_post(post))
     }

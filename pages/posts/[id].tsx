@@ -9,6 +9,10 @@ import {CommentType, PostType} from "../../redux/reducers/postsReducer";
 import styled from "styled-components";
 import {AppStateType} from "../../redux/reducers/rootReducer";
 
+type PostTypeProps = {
+    pageProps:PostType
+}
+
 const MyUL = styled.ul`
   list-style-type: none;
   margin: 0 auto;
@@ -81,9 +85,7 @@ type GetInitialPropsType = {
     store: any
 }
 
-type PostTypeProps = {
-    pageProps:PostType
-}
+
 function Post(props: PostTypeProps) {
      const postSelector = useSelector((state: AppStateType) => state.latestPosts.post)
     const dispatch = useDispatch()
