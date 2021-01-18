@@ -4,7 +4,7 @@ import {
     clean_post, deletePost, get_posts, getPosts
 } from "../redux/actions/getPostsActions";
 import {postsAPI} from "../api/api";
-import Link from "next/Link";
+import Link from "../node_modules/next/Link";
 import {MainLayout} from "../components/MainLayout";
 import {useEffect} from "react";
 import {AnyAction, CombinedState} from 'redux';
